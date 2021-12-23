@@ -1,25 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container mx-auto'>
+        <h1>Tailwind CSS</h1>
+        <h2>Incorporado con PostCss</h2>
+        <button className="btn btn-blue btn-blue:hover">Botón</button>
+        <div className="my-5 flex flex-wrap -mx-2">
+            <div className="w-full sm:w-1/2 lg:w-1/3 px-2 my-2">
+                <Card photo='https://picsum.photos/800/600' />
+            </div>
+            <div className="w-full sm:w-1/2 lg:w-1/3 px-2 my-2">
+                <Card photo='https://picsum.photos/800/600' />
+            </div>
+            <div className="w-full sm:w-1/2 lg:w-1/3 px-2 my-2">
+                <Card photo='https://picsum.photos/800/600' />
+            </div>
+        </div>
     </div>
-  );
+)
 }
 
 export default App;
