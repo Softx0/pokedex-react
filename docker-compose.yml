@@ -1,0 +1,8 @@
+version: "3.7"
+services:
+  web:
+    image: frontend_pokedex_dev
+    build: .
+    container_name: pokedex_frontend_dev
+    ports:
+      - 3000:80
