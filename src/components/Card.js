@@ -1,5 +1,8 @@
 
 const Card = ({photo}) => {
+    
+    
+    
     return (
         <div className='card'>
             <img src={photo} alt="" className='w-full' />
