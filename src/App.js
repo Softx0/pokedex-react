@@ -4,13 +4,24 @@ import charizardImage from './assets/images/Charizard.png';
 import ScreenPokedex from "./components/ScreenPokedex";
 import AttributePokemon from './components/AttributePokemon';
 import AttributePokemonSpecial from './components/AttributePokemonSpecial';
+import PokemonService from './api/PokemonService';
+import { useEffect, useState } from 'react';
 
 const App = () => {
 
+  const [name, setName] = useState();
+  
+  useEffect(() => {
+    getPokemonByName(name);
+  },[]);
 
+  const getPokemonByName = async (name) => {
+    const data = await PokemonService.getPokemonByName(name);
+    console.log(data);
+  }
 
   return (
-    <div className=''>
+    <div>
 
       <div className="flex justify-center items-center bg-red-pokemon h-auto">
         <img alt="pokedex-logo" className="w-auto h-24 flex" src={pokedexLogo} />
