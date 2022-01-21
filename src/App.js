@@ -2,6 +2,8 @@ import './App.css';
 import pokedexLogo from './assets/images/pokedex-project.png';
 import charizardImage from './assets/images/Charizard.png';
 import ScreenPokedex from "./components/ScreenPokedex";
+import AttributePokemon from './components/AttributePokemon';
+import AttributePokemonSpecial from './components/AttributePokemonSpecial';
 
 const App = () => {
 
@@ -15,7 +17,7 @@ const App = () => {
       </div>
 
       <div className="flex justify-center bg-blue-pokemon h-auto w-auto">
-        
+
         <div className="bg-red-pokedex-pokemon border-black h-auto w-auto rounded-lg my-32">
           <div className="flex mx-4 mt-6">
             <label className="flex text-xl text-yellow-pokemon mx-2">Buscar</label>
@@ -32,55 +34,39 @@ const App = () => {
 
         <div className="bg-red-pokedex-pokemon h-auto w-auto rounded-lg my-48">
           <div className=" bg-gray-pokemon h-auto w-auto rounded-lg mx-4 mt-4">
-            <div className="flex">
-              <div className="flex bg-gray-900 h-10 rounded-md m-2">
-                <label className="flex text-sm text-yellow-pokemon m-2">HP:</label>
-                <label className="flex text-sm text-yellow-pokemon m-2">78</label>
-              </div>
-              <div className="flex bg-gray-900 h-10 rounded-md m-2">
-                <label className="flex text-sm text-yellow-pokemon rounded-lg m-2">Peso:</label>
-                <label className="flex text-sm text-yellow-pokemon m-2">905 kg</label>
-              </div>
-            </div>
-            <div className="flex">
-              <div className="flex bg-gray-900 h-10 w-auto rounded-md m-2">
-                <label className="flex text-sm text-yellow-pokemon rounded-lg m-2">Tipo:</label>
-                <div className="flex bg-red-800 h-auto w-auto rounded-md m-2">
-                  <label className="flex text-sm text-yellow-pokemon">Fuego</label>
-                </div>
 
-              </div>
-              <div className="flex bg-gray-900 h-10 w-auto rounded-md  m-2">
-                <label className="flex text-sm text-yellow-pokemon rounded-lg m-2">Debilidad:</label>
-                <div className="flex bg-gray-500 h-auto w-auto rounded-md m-2">
-                  <label className="flex text-sm text-white">Volador</label>
-                </div>
-              </div>
+            <div className="flex">
+              <AttributePokemon label={'HP:'} count={'200'} />
+              <AttributePokemon label={'Peso:'} count={'200 kg'} />
             </div>
 
             <div className="flex">
-              <div className="flex bg-gray-900 h-10 w-auto rounded-md m-2">
-                <label className="flex text-sm text-yellow-pokemon rounded-lg m-2">Ataque:</label>
-                <label className="flex text-sm text-yellow-pokemon m-2">200 pts</label>
 
-              </div>
-              <div className="flex bg-gray-900 h-10 w-auto rounded-md  m-2">
-                <label className="flex text-sm text-yellow-pokemon rounded-lg m-2">Velocidad:</label>
-                <label className="flex text-sm text-yellow-pokemon m-2">100 pts</label>
-              </div>
+              <AttributePokemonSpecial
+                label={'Tipo:'}
+                colorPill={'bg-red-800'}
+                colorLabel={'text-yellow-pokemon'}
+                value={'Fuego'}
+              />
+
+              <AttributePokemonSpecial
+                label={'Debilidad:'}
+                colorPill={'bg-gray-500'}
+                colorLabel={'text-white'}
+                value={'Volador'}
+              />
             </div>
 
             <div className="flex">
-              <div className="flex bg-gray-900 h-10 w-auto rounded-md m-2">
-                <label className="flex text-sm text-yellow-pokemon rounded-lg m-2">Defensa:</label>
-                <label className="flex text-sm text-yellow-pokemon m-2">78 pts</label>
-
-              </div>
-              <div className="flex bg-gray-900 h-10 w-auto rounded-md  m-2">
-                <label className="flex text-sm text-yellow-pokemon rounded-lg m-2">Velocidad:</label>
-                <label className="flex text-sm text-yellow-pokemon m-2">100 pts</label>
-              </div>
+              <AttributePokemon label={'Ataque:'} count={'200pts'} />
+              <AttributePokemon label={'Ataque:'} count={'200pts'} />
             </div>
+
+            <div className="flex">
+              <AttributePokemon label={'Ataque:'} count={'200pts'} />
+              <AttributePokemon label={'Ataque:'} count={'200pts'} />
+            </div>
+
           </div>
         </div>
 
