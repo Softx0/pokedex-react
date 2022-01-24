@@ -1,13 +1,11 @@
-import { useState } from "react";
 
-const ScreenPokedex = ({imagePokemon}) => {
-
-    const [pokemon] = useState(imagePokemon);
+const ScreenPokedex = ({ imagePokemon }) => {
 
     return (
         <>
-            <div className="flex bg-blue-light-pokemon h-72 w-72 rounded-lg mx-4 mt-7">
-                <img alt='charizardImage' className="w-auto h-auto flex" src={pokemon} />
+            <div className="flex border-4 border-blue-light-pokemon hover:border-blue-pokemon bg-blue-light-pokemon hover:bg-blue-pokemon 
+                                 h-auto w-auto rounded-lg m-6">
+                <img alt='pokemonImage' className="flex w-72 h-auto " src={imagePokemon} />
             </div>
         </>
     )

@@ -7,9 +7,10 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "apisauce": "^1.1.5",
-    "dotenv-cli": "^4.1.1",
+    "dotenv-cli": "4.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.25.0",
     "react-scripts": "5.0.0",
     "web-vitals": "^2.1.2"
   },
@@ -44,6 +45,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "jest": "^27.4.5",
     "postcss-cli": "^9.1.0",
-    "tailwindcss": "^3.0.7"
+    "tailwindcss": "^3.0.7",
+    "dotenv-cli": "4.1.1"
   }
 }

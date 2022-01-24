@@ -1,5 +1,4 @@
 
-
 const AttributePokemonSpecial = ({ 
         label, 
         colorPill, 
@@ -7,13 +6,11 @@ const AttributePokemonSpecial = ({
         value 
     }) => {
 
-
-        
     return (
         <>
-            <div className="flex bg-gray-900 h-10 w-auto rounded-md m-2">
+            <div className="flex bg-gray-900 h-auto w-full rounded-md m-2">
                 <label className="flex text-sm text-yellow-pokemon m-2">{label}</label>
-                <div className={`flex h-auto w-auto rounded-md m-2 ${colorPill}`}>
+                <div className={`flex h-auto w-auto rounded-sm px-1 m-2 ${colorPill}`}>
                     <label className={`flex text-sm ${colorLabel}`}>{value}</label>
                 </div>
             </div>

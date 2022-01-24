@@ -1,7 +1,6 @@
 import { BaseApi } from './BaseApi';
 
-const getPokemonByNameUrl = (name) => `/pokemon/${name}`;
-
+const getPokemonByNameUrl = (name) => `${process.env.REACT_APP_URL}pokemon/${name}`;
 
 /**
  * Obtiene la informacion relacionada al pokemon escrito
@@ -9656,7 +9655,6 @@ const getPokemonByName = (request, headers) =>
   BaseApi.get(getPokemonByNameUrl(request), null, headers).then(
     (response) => response.data
   );
-
 
 export default {
     getPokemonByName,
