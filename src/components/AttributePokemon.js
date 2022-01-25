@@ -1,4 +1,3 @@
-
 const AttributePokemon = ({ label, count }) => {
 
     return (

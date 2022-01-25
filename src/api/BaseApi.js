@@ -1,7 +1,6 @@
 import { create } from "apisauce";
 import ResponseCode from "./utils/ResponseCode";
 
-
 const BaseApi = create({
     baseUrl: process.env.REACT_APP_URL,
     headers: {

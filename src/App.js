@@ -39,7 +39,6 @@ const App = () => {
       // TODO: manage the error w/ dispatch
       setMsgValidation(ResponseCode.CLIENT_ERROR.message)
       OpenModal();
-      console.error('Ha ocurrido un error', data);
       return;
     }
 
@@ -72,16 +71,15 @@ const App = () => {
   }
 
   const determinateColorByType = (type) => {
-        
     for (const key in Types) {
-        if(key === type){
-          return {
-            bgColor: Types[key].bgColor,
-            textColor: Types[key].textColor,
-          }
+      if (key === type) {
+        return {
+          bgColor: Types[key].bgColor,
+          textColor: Types[key].textColor,
         }
+      }
     }
-}
+  }
 
   return (
     <>
