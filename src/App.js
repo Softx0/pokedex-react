@@ -13,6 +13,8 @@ import Types from './api/utils/Types';
 const App = () => {
 
   let pokemonSpecs = {
+    id: 0,
+    name: `Who's that pokemon?`,
     weight: 0,
     urlImage: '',
     height: 0,
@@ -37,12 +39,15 @@ const App = () => {
 
     if (data.problem === null || data.problem === ResponseCode.CLIENT_ERROR) {
       // TODO: manage the error w/ dispatch
-      setMsgValidation(ResponseCode.CLIENT_ERROR.message)
+      setMsgValidation(ResponseCode.CLIENT_ERROR.message);
+      setDataPokemon(pokemonSpecs);
       OpenModal();
       return;
     }
 
-    let pokemonCompleteSpecs = {
+    pokemonSpecs = {
+      id: data.id,
+      name: data.forms[0].name,
       height: data.height,
       weight: data.weight,
       type: (data.types[0].type.name).toUpperCase(),
@@ -57,8 +62,9 @@ const App = () => {
       }
     }
 
-    setPokemonType(determinateColorByType((data.types[0].type.name).toUpperCase()));
-    setDataPokemon(pokemonCompleteSpecs);
+    setPokemonType(determinateColorByType((data.types[0].type.name).toLowerCase()));
+    setDataPokemon(pokemonSpecs);
+
   }
 
   useEffect(() => {
@@ -71,14 +77,10 @@ const App = () => {
   }
 
   const determinateColorByType = (type) => {
-    for (const key in Types) {
-      if (key === type) {
-        return {
-          bgColor: Types[key].bgColor,
-          textColor: Types[key].textColor,
-        }
-      }
-    }
+    // console.log(Types[type]);
+    const definitiveType = Types[type];
+    return definitiveType;
+
   }
 
   return (
@@ -108,7 +110,10 @@ const App = () => {
                            focus:outline-none focus:shadow-outline"
             />
           </div>
-          <ScreenPokedex imagePokemon={dataPokemon.urlImage !== '' ? dataPokemon.urlImage : defaultImage} />
+          <ScreenPokedex imagePokemon={dataPokemon.urlImage !== '' ? dataPokemon.urlImage : defaultImage}
+            idPokemon={dataPokemon.id}
+            namePokemon={dataPokemon.name}
+          />
         </div>
 
         <div className="bg-red-pokemon h-72 w-2 rounded-sm my-52"></div>
@@ -125,8 +130,8 @@ const App = () => {
 
               <AttributePokemonSpecial
                 label={'Type:'}
-                colorPill={pokemonType.bgColor}
-                colorLabel={pokemonType.textColor}
+                colorPill={pokemonType}
+                colorLabel={'text-white'}
                 value={dataPokemon.type}
               />
 

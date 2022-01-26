@@ -19,7 +19,7 @@ const Modal = ({ msgValidation }) => {
             className="flex items-center justify-center modal invisible absolute
                         top-0 bottom-0 left-0 right-0 bg-opacity-90">
             <div className="flex flex-col items-center justify-center rounded-lg 
-                              bg-blue-light-pokemon p-10 w-2/5">
+                              bg-blue-light-pokemon border-2 border-blue-900 p-10 w-2/5">
 
                 <img src={imageIssue} alt="Exclamation icon" className="w-1/3" />
 
