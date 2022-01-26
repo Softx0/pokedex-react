@@ -1,4 +1,3 @@
-import './App.css';
 import pokedexLogo from './assets/images/pokedex-project.png';
 import defaultImage from './assets/images/who-is-that-pokemon.png';
 import ScreenPokedex from "./components/ScreenPokedex";
@@ -74,15 +73,10 @@ const App = () => {
   }, [dataPokemon, pokemonName]);
 
   // Manejando los eventos de teclado
-  const handleChange = (event) => {
-    setPokemonName(event.target.value.toLowerCase());
-    // console.log('key logger: ', event.target.value);
-  }
-
+  const handleChange = (event) => setPokemonName(event.target.value.toLowerCase());
+  
   const determinateColorByType = (type) => {
-    console.log(Types[type]);
-    const definitiveColor = Types[type];
-    return definitiveColor;
+    return definitiveColor = Types[type];
   }
 
   return (
