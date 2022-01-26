@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import ResponseCode from './api/utils/ResponseCode';
 import { OpenModal, Modal } from './components/Modal';
 import Types from './api/utils/Types';
+import Constants from './utils/Constants';
 
 const App = () => {
 
@@ -26,11 +27,13 @@ const App = () => {
       'special-attack': 0,
       'special-defense': 0,
     },
-    type: '?',
+    type: '???',
   };
 
+  let initialStatePokemonType = Constants.BG_COLOR_DEFAULT.default;
+
   const [pokemonName, setPokemonName] = useState("");
-  const [pokemonType, setPokemonType] = useState({});
+  const [pokemonType, setPokemonType] = useState(initialStatePokemonType);
   const [dataPokemon, setDataPokemon] = useState(pokemonSpecs);
   const [msgValidation, setMsgValidation] = useState("");
 
@@ -77,10 +80,9 @@ const App = () => {
   }
 
   const determinateColorByType = (type) => {
-    // console.log(Types[type]);
-    const definitiveType = Types[type];
-    return definitiveType;
-
+    console.log(Types[type]);
+    const definitiveColor = Types[type];
+    return definitiveColor;
   }
 
   return (
