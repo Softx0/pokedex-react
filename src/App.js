@@ -29,7 +29,7 @@ const App = () => {
   };
 
   const initialStatePokemonColorType = [Constants.BG_COLOR_DEFAULT.default];
-  const initialStatePokemonType = ["INDETERMINATE","INDETERMINATE"];
+  const initialStatePokemonType = ["?"];
 
   const [pokemonName, setPokemonName] = useState("");
   const [pokemonColorType] = useState(initialStatePokemonColorType);
@@ -66,7 +66,6 @@ const App = () => {
     }
 
     setPokemonTypes(typesOfThePokemon(data));
-    // setPokemonColorType(determinateColorByTypes(typesOfThePokemon(data)));
     setDataPokemon(pokemonSpecs);
   }
 
@@ -75,13 +74,11 @@ const App = () => {
 
   // Manejando los eventos de teclado
   const handleChange = (event) => setPokemonName(event.target.value.toLowerCase());
-  
 
   let typesOfThePokemon = (data) => {
     let arrayTypes = data.types.map(element => {
       return element.type.name;
     });
-    // console.log(`Los tipos en base al pokemon: ${arrayTypes}`);
     return arrayTypes;
   }
 
@@ -130,7 +127,6 @@ const App = () => {
 
             <div className="flex">
 
-               {/* TODO: iterate the types and determinate the colors inside the component */}
               <AttributePokemonSpecial
                 label={'Type:'}
                 colorPill={pokemonColorType[0]}
