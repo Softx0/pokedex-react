@@ -7,7 +7,6 @@ import PokemonService from './api/PokemonService';
 import { useState, useEffect } from 'react';
 import ResponseCode from './api/utils/ResponseCode';
 import { OpenModal, Modal } from './components/Modal';
-import Types from './api/utils/Types';
 import Constants from './utils/Constants';
 
 const App = () => {
@@ -29,10 +28,12 @@ const App = () => {
     type: '???',
   };
 
-  let initialStatePokemonType = Constants.BG_COLOR_DEFAULT.default;
+  const initialStatePokemonColorType = [Constants.BG_COLOR_DEFAULT.default];
+  const initialStatePokemonType = ["INDETERMINATE","INDETERMINATE"];
 
   const [pokemonName, setPokemonName] = useState("");
-  const [pokemonType, setPokemonType] = useState(initialStatePokemonType);
+  const [pokemonColorType] = useState(initialStatePokemonColorType);
+  const [pokemonTypes, setPokemonTypes] = useState(initialStatePokemonType);
   const [dataPokemon, setDataPokemon] = useState(pokemonSpecs);
   const [msgValidation, setMsgValidation] = useState("");
 
@@ -64,19 +65,24 @@ const App = () => {
       }
     }
 
-    setPokemonType(determinateColorByType((data.types[0].type.name).toLowerCase()));
+    setPokemonTypes(typesOfThePokemon(data));
+    // setPokemonColorType(determinateColorByTypes(typesOfThePokemon(data)));
     setDataPokemon(pokemonSpecs);
-
   }
 
   useEffect(() => {
-  }, [dataPokemon, pokemonName]);
+  }, [dataPokemon, pokemonName, pokemonColorType, pokemonTypes]);
 
   // Manejando los eventos de teclado
   const handleChange = (event) => setPokemonName(event.target.value.toLowerCase());
   
-  const determinateColorByType = (type) => {
-    return definitiveColor = Types[type];
+
+  let typesOfThePokemon = (data) => {
+    let arrayTypes = data.types.map(element => {
+      return element.type.name;
+    });
+    // console.log(`Los tipos en base al pokemon: ${arrayTypes}`);
+    return arrayTypes;
   }
 
   return (
@@ -124,11 +130,12 @@ const App = () => {
 
             <div className="flex">
 
+               {/* TODO: iterate the types and determinate the colors inside the component */}
               <AttributePokemonSpecial
                 label={'Type:'}
-                colorPill={pokemonType}
+                colorPill={pokemonColorType[0]}
                 colorLabel={'text-white'}
-                value={dataPokemon.type}
+                pokemonTypes={pokemonTypes}
               />
 
               <AttributePokemon label={'Speed:'} count={dataPokemon.stats.speed} />
