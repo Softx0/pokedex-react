@@ -37,13 +37,16 @@ const App = () => {
   const [dataPokemon, setDataPokemon] = useState(pokemonSpecs);
   const [msgValidation, setMsgValidation] = useState("");
 
-  const onSubmit = async () => {
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
     const data = await PokemonService.getPokemonByName(pokemonName);
 
     if (data.problem === null || data.problem === ResponseCode.CLIENT_ERROR) {
       // TODO: manage the error w/ dispatch
       setMsgValidation(ResponseCode.CLIENT_ERROR.message);
       setDataPokemon(pokemonSpecs);
+      setPokemonTypes(initialStatePokemonType);
       OpenModal();
       return;
     }
@@ -90,25 +93,28 @@ const App = () => {
 
       <div className="flex justify-center bg-blue-pokemon h-auto w-auto">
         <div className="bg-red-pokedex-pokemon border-black h-auto w-auto rounded-lg my-32">
-          <div className="flex mx-4 mt-6">
-            <button
-              className="flex bg-blue-light-pokemon hover:bg-blue-pokemon text-xl btn btn-primary rounded-0 text-black hover:text-yellow-pokemon mx-2"
-              type="submit"
-              onClick={onSubmit}
-            >
-              Buscar
-            </button>
-            <input
-              name="pokemonName"
-              type="text"
-              placeholder="Pokemon name"
-              onChange={handleChange}
-              value={pokemonName}
-              className="flex bg-gray-pokemon shadow appearance-none border rounded py-1 px-3 
+          <form onSubmit={onSubmit} >
+            <div className="flex mx-4 mt-6">
+              <button
+                id="buscar"
+                className="flex bg-blue-light-pokemon hover:bg-blue-pokemon text-xl btn btn-primary rounded-0 text-black hover:text-yellow-pokemon mx-2"
+                type="submit"
+              >
+                Buscar
+              </button>
+              <input
+                id="pokemonName"
+                name="pokemonName"
+                type="text"
+                placeholder="Pokemon name"
+                onChange={handleChange}
+                value={pokemonName}
+                className="flex bg-gray-pokemon shadow appearance-none border rounded py-1 px-3 
                            leading-tight focus:bg-white focus:border-blue-500 text-gray-600 
                            focus:outline-none focus:shadow-outline"
-            />
-          </div>
+              />
+            </div>
+          </form>
           <ScreenPokedex imagePokemon={dataPokemon.urlImage !== '' ? dataPokemon.urlImage : defaultImage}
             idPokemon={dataPokemon.id}
             namePokemon={dataPokemon.name}

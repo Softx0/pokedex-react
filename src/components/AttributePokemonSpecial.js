@@ -7,19 +7,6 @@ const AttributePokemonSpecial = ({
     pokemonTypes
 }) => {
 
-    // Devolviendo el color 
-    // const determinateColorByTypes = (arrayPokemonTypes) => {
-    //     console.log(arrayPokemonTypes);
-
-    //     let definitiveColors = arrayPokemonTypes.map(element => {
-    //         return Types[element];
-    //     })
-    //     console.log(definitiveColors);
-
-    //     return definitiveColors;
-    // }
-
-
     const determinateColorByTypesV2 = (arrayPokemonTypes) => {
         return arrayPokemonTypes.map((element, index) => {
             return (
