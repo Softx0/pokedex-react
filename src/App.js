@@ -119,6 +119,12 @@ const App = () => {
             idPokemon={dataPokemon.id}
             namePokemon={dataPokemon.name}
           />
+
+          <div className="flex">
+            <div className="bg-slate-800 m-4 p-4 rounded-full w-1/12 shadow-lg shadow-slate-700"></div>
+
+            <div className="bg-red-800 m-2 rounded-full w-1/3"></div>
+          </div>
         </div>
 
         <div className="bg-red-pokemon h-72 w-2 rounded-sm my-52"></div>
