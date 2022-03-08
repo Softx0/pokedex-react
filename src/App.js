@@ -121,9 +121,43 @@ const App = () => {
           />
 
           <div className="flex">
-            <div className="bg-slate-800 m-4 p-4 rounded-full w-1/12 shadow-lg shadow-slate-700"></div>
+            <div className="bg-slate-800 m-4 w-12 h-8 rounded-full shadow-lg shadow-slate-700/50"></div>
 
-            <div className="bg-red-800 m-2 rounded-full w-1/3"></div>
+            <div className="bg-red-800 mt-6 rounded-full h-3 w-1/4 shadow-lg shadow-red-800/50"></div>
+
+            <div className="bg-blue-800 mt-6 mx-4 rounded-full h-3 w-1/4 shadow-lg shadow-blue-800/50"></div>
+
+            <div className="border-2 rounded-full h-6 w-6 absolute border-gray-700 ml-m-264 mt-11"></div>
+
+            <div className="w-1/2 m-3">
+
+              <div className="flex flex-col ml-10">
+                <div className="bg-slate-900 w-8 h-7 rounded-t-md shadow-md shadow-black">
+                    <a className="bg-gradient-to-tr  active:from-slate-900 active:to-black focus-visible:ring outline-none transition duration-100 px-4 py-1 rounded"></a>
+                </div>
+              </div>
+
+              <div className="flex flex-row ml-3">
+                <div className="">
+                  <div className="bg-slate-900 w-11 h-8 rounded-l-md shadow-lg shadow-black">
+
+                  </div>
+                </div>
+
+                <div className="">
+                  <div className="bg-slate-900 w-11 h-8 rounded-r-md shadow-md shadow-black">
+
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col ml-10 shadow">
+                <div className="bg-slate-900 w-8 h-7 rounded-b-md shadow-lg shadow-black">
+
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
 
