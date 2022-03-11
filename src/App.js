@@ -133,27 +133,39 @@ const App = () => {
 
               <div className="flex flex-col ml-10">
                 <div className="bg-slate-900 w-8 h-7 rounded-t-md shadow-md shadow-black">
-                    <a className="bg-gradient-to-tr  active:from-slate-900 active:to-black focus-visible:ring outline-none transition duration-100 px-4 py-1 rounded"></a>
+                  <a href='#'
+                    className="bg-gradient-to-t active:from-slate-900 active:to-slate-900 focus-visible:ring 
+                                outline-none transition duration-100 px-4 py-1 rounded">
+                  </a>
                 </div>
               </div>
 
               <div className="flex flex-row ml-3">
                 <div className="">
                   <div className="bg-slate-900 w-11 h-8 rounded-l-md shadow-lg shadow-black">
-
+                    <a href='#'
+                      className="bg-gradient-to-l active:from-slate-900 active:to-slate-900 focus-visible:ring 
+                                  outline-none transition duration-100 px-4 pt-1 pb-3 rounded">
+                    </a>
                   </div>
                 </div>
 
                 <div className="">
                   <div className="bg-slate-900 w-11 h-8 rounded-r-md shadow-md shadow-black">
-
+                    <a href='#'
+                      className="bg-gradient-to-r active:from-slate-900 active:to-slate-900 focus-visible:ring 
+                                  outline-none transition duration-100 px-4 pt-1 pb-3 ml-3 rounded">
+                    </a>
                   </div>
                 </div>
               </div>
 
               <div className="flex flex-col ml-10 shadow">
-                <div className="bg-slate-900 w-8 h-7 rounded-b-md shadow-lg shadow-black">
-
+                <div className="bg-slate-900 w-8 h-7 rounded-b-md shadow-xl shadow-black">
+                  <a href='#'
+                    className="bg-gradient-to-t active:from-black active:to-slate-900 focus-visible:ring 
+                                outline-none transition duration-100 px-4 py-2 rounded">
+                  </a>
                 </div>
               </div>
 
