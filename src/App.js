@@ -121,6 +121,7 @@ const App = () => {
           />
 
           <div className="flex">
+
             <div className="bg-slate-800 m-4 w-12 h-8 rounded-full shadow-lg shadow-slate-700/50"></div>
 
             <div className="bg-red-800 mt-6 rounded-full h-3 w-1/4 shadow-lg shadow-red-800/50"></div>
@@ -170,6 +171,7 @@ const App = () => {
               </div>
 
             </div>
+
           </div>
         </div>
 
@@ -204,6 +206,25 @@ const App = () => {
               <AttributePokemon label={'Special Attack:'} count={dataPokemon.stats['special-attack']} />
               <AttributePokemon label={'Special Defense:'} count={dataPokemon.stats['special-defense']} />
             </div>
+          </div>
+
+          <div className="grid grid-cols-5 gap-1 h-20 w-25 mx-6 mt-4">
+            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
+            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
+            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
+            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
+            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
+            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
+            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
+            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
+            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
+            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
+          </div>
+
+          <div className="grid grid-cols-2 my-2 ">
+            <div className="bg-red-800  shadow-lg shadow-red-800/50 rounded w-20 bottom-0 right-0">1</div>
+
+            <div className="bg-blue-800 shadow-lg shadow-blue-800/50 rounded w-20">2</div>
           </div>
         </div>
 
