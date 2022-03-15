@@ -36,7 +36,7 @@ module.exports = {
       },
       margin: {
         "m-264": "264px"
-      }
+      },
     },
   },
   plugins: [],

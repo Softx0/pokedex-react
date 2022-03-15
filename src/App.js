@@ -92,7 +92,7 @@ const App = () => {
       </div>
 
       <div className="flex justify-center bg-blue-pokemon h-auto w-auto">
-        <div className="bg-red-pokedex-pokemon border-black h-auto w-auto rounded-lg my-32">
+        <div className="bg-red-pokedex-pokemon border-black h-auto w-auto rounded-lg my-40">
           <form onSubmit={onSubmit} >
             <div className="flex mx-4 mt-6">
               <button
@@ -122,7 +122,7 @@ const App = () => {
 
           <div className="flex">
 
-            <div className="bg-slate-800 m-4 w-12 h-8 rounded-full shadow-lg shadow-slate-700/50"></div>
+            <div className="bg-slate-800 m-4 w-12 h-8 rounded-full shadow-lg shadow-slate-700/50 border-l-4 border-b-4 border-l-black border-b-black"></div>
 
             <div className="bg-red-800 mt-6 rounded-full h-3 w-1/4 shadow-lg shadow-red-800/50"></div>
 
@@ -133,8 +133,8 @@ const App = () => {
             <div className="w-1/2 m-3">
 
               <div className="flex flex-col ml-10">
-                <div className="bg-slate-900 w-8 h-7 rounded-t-md shadow-md shadow-black">
-                  <a href='#'
+                <div className="bg-slate-800 w-8 h-7 rounded-t-md shadow-md shadow-black border-l-4 border-l-slate-900">
+                  <a href=''
                     className="bg-gradient-to-t active:from-slate-900 active:to-slate-900 focus-visible:ring 
                                 outline-none transition duration-100 px-4 py-1 rounded">
                   </a>
@@ -143,17 +143,17 @@ const App = () => {
 
               <div className="flex flex-row ml-3">
                 <div className="">
-                  <div className="bg-slate-900 w-11 h-8 rounded-l-md shadow-lg shadow-black">
-                    <a href='#'
+                  <div className="bg-slate-800 w-8 h-8 rounded-l-md shadow-lg shadow-black border-l-4 border-l-slate-900 border-t-4 border-t-slate-900">
+                    <a href=''
                       className="bg-gradient-to-l active:from-slate-900 active:to-slate-900 focus-visible:ring 
                                   outline-none transition duration-100 px-4 pt-1 pb-3 rounded">
                     </a>
                   </div>
                 </div>
 
-                <div className="">
-                  <div className="bg-slate-900 w-11 h-8 rounded-r-md shadow-md shadow-black">
-                    <a href='#'
+                <div className="bg-slate-800 w-14 h-8 rounded-r-md shadow-md shadow-black">
+                  <div className="bg-slate-800 w-8 h-8 ml-6 rounded-r-md border-b-4 border-b-slate-900">
+                    <a href=''
                       className="bg-gradient-to-r active:from-slate-900 active:to-slate-900 focus-visible:ring 
                                   outline-none transition duration-100 px-4 pt-1 pb-3 ml-3 rounded">
                     </a>
@@ -161,9 +161,9 @@ const App = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col ml-10 shadow">
-                <div className="bg-slate-900 w-8 h-7 rounded-b-md shadow-xl shadow-black">
-                  <a href='#'
+              <div className="flex flex-col ml-10">
+                <div className="bg-slate-800 w-8 h-7 rounded-b-md shadow-xl shadow-black border-l-4 border-l-slate-900 border-b-4 border-b-slate-900">
+                  <a href=''
                     className="bg-gradient-to-t active:from-black active:to-slate-900 focus-visible:ring 
                                 outline-none transition duration-100 px-4 py-2 rounded">
                   </a>
@@ -208,23 +208,28 @@ const App = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-5 gap-1 h-20 w-25 mx-6 mt-4">
-            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
-            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
-            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
-            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
-            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
-            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
-            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
-            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
-            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
-            <div className="bg-blue-400 rounded shadow-md shadow-blue-400/50"></div>
+          <div className="grid grid-cols-5 h-20 w-25 mx-6 mt-4">
+            <div className="bg-blue-400 rounded-tl-md shadow-md shadow-blue-500 border-l-8 border-l-blue-500 border-b-2 border-b-black border-r-2 border-r-black"></div>
+            <div className="bg-blue-400 rounded-sm shadow-md shadow-blue-400/50 border-b-2 border-r-2 border-black"></div>
+            <div className="bg-blue-400 rounded-sm shadow-md shadow-blue-400/50 border-b-2 border-r-2 border-black"></div>
+            <div className="bg-blue-400 rounded-sm shadow-md shadow-blue-400/50 border-b-2 border-r-2 border-black"></div>
+            <div className="bg-blue-400 rounded-sm rounded-tr-md shadow-md shadow-blue-400/50 border-b-2 border-black"></div>
+
+            <div className="bg-blue-400 rounded-bl-md shadow-md shadow-blue-400/50 border-l-8 border-b-8 border-blue-500 border-r-2 border-r-black"></div>
+            <div className="bg-blue-400 rounded-sm shadow-md shadow-blue-400/50 border-b-8 border-b-blue-500 border-r-2 border-r-black"></div>
+            <div className="bg-blue-400 rounded-sm shadow-md shadow-blue-400/50 border-b-8 border-b-blue-500 border-r-2 border-r-black"></div>
+            <div className="bg-blue-400 rounded-sm shadow-md shadow-blue-400/50 border-b-8 border-b-blue-500 border-r-2 border-r-black"></div>
+            <div className="bg-blue-400 rounded-sm rounded-br-md shadow-md shadow-blue-400/50 border-b-8 border-b-blue-500"></div>
           </div>
 
-          <div className="grid grid-cols-2 my-2 ">
-            <div className="bg-red-800  shadow-lg shadow-red-800/50 rounded w-20 bottom-0 right-0">1</div>
+          <div className="flex place-content-end">
+            <div class="rounded-full bg-slate-700 py-2 my-4 mr-2 w-16 "></div>
+            <div class="rounded-full bg-slate-700 py-2 my-4 mr-2 w-16"></div>
+          </div>
 
-            <div className="bg-blue-800 shadow-lg shadow-blue-800/50 rounded w-20">2</div>
+          <div className="flex ml-6 mb-2">
+            <div className="bg-white py-6 px-8 rounded-tl-md rounded-bl-md border-b-gray-400 border-b-4 border-l-gray-400 border-l-4 border-r-2 border-r-black"></div>
+            <div className="bg-white py-6 px-8 rounded-tr-md rounded-br-md border-b-gray-400 border-b-4"></div>
           </div>
         </div>
 
