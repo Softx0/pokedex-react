@@ -33,7 +33,10 @@ module.exports = {
       },
       fontFamily: {
         'pokemon': ['pokemon']
-      }
+      },
+      margin: {
+        "m-264": "264px"
+      },
     },
   },
   plugins: [],
