@@ -34,6 +34,9 @@ const App = () => {
   const [pokemonName, setPokemonName] = useState("");
   const [pokemonColorType] = useState(initialStatePokemonColorType);
   const [pokemonTypes, setPokemonTypes] = useState(initialStatePokemonType);
+  // const [pokemonWeakness, setPokemonWeakness] = useState([]);
+  // const [pokemonStrength, setPokemonStrength] = useState([]);
+  const [damageRelationship, setDamageRelationship] = useState();
   const [dataPokemon, setDataPokemon] = useState(pokemonSpecs);
   const [msgValidation, setMsgValidation] = useState("");
 
@@ -73,6 +76,7 @@ const App = () => {
   }
 
   useEffect(() => {
+    obtainStrengthAndWeaknessFromType();
   }, [dataPokemon, pokemonName, pokemonColorType, pokemonTypes]);
 
   // Manejando los eventos de teclado
@@ -84,6 +88,40 @@ const App = () => {
     });
     return arrayTypes;
   }
+
+  let obtainStrengthAndWeaknessFromType = async () => {
+    const data = await PokemonService.getTypePokemon(pokemonTypes);
+
+    if (data.problem === null || data.problem === ResponseCode.CLIENT_ERROR) {
+      // TODO: manage the error w/ dispatch
+      setMsgValidation("El tipo del pokemon tiene un problema!");
+      OpenModal();
+      return;
+    }
+
+    setDamageRelationship(data.damage_relations);
+    
+    console.log(damageRelationship);
+
+  }
+
+  // let obtainWeaknessFromType = async () => {
+  //   const data = await PokemonService.getTypePokemon(pokemonTypes);
+
+  //   if (data.problem === null || data.problem === ResponseCode.CLIENT_ERROR) {
+  //     // TODO: manage the error w/ dispatch
+  //     setMsgValidation("El tipo del pokemon tiene un problema!");
+  //     OpenModal();
+  //     return;
+  //   }
+
+  //   setPokemonWeakness(data.damage_relations.double_damage_from, 
+  //               data.damage_relations.half_damage_from, 
+  //               data.damage_relations.no_damage_from
+  //             );
+
+  //   console.log(pokemonWeakness);
+  // }
 
   return (
     <>
@@ -134,7 +172,7 @@ const App = () => {
 
               <div className="flex flex-col ml-10">
                 <div className="bg-slate-800 w-8 h-7 rounded-t-md shadow-md shadow-black border-l-4 border-l-slate-900">
-                  <a href=''
+                  <a
                     className="bg-gradient-to-t active:from-slate-900 active:to-slate-900 focus-visible:ring 
                                 outline-none transition duration-100 px-4 py-1 rounded">
                   </a>
@@ -144,7 +182,7 @@ const App = () => {
               <div className="flex flex-row ml-3">
                 <div className="">
                   <div className="bg-slate-800 w-8 h-8 rounded-l-md shadow-lg shadow-black border-l-4 border-l-slate-900 border-t-4 border-t-slate-900">
-                    <a href=''
+                    <a
                       className="bg-gradient-to-l active:from-slate-900 active:to-slate-900 focus-visible:ring 
                                   outline-none transition duration-100 px-4 pt-1 pb-3 rounded">
                     </a>
@@ -153,7 +191,7 @@ const App = () => {
 
                 <div className="bg-slate-800 w-14 h-8 rounded-r-md shadow-md shadow-black">
                   <div className="bg-slate-800 w-8 h-8 ml-6 rounded-r-md border-b-4 border-b-slate-900">
-                    <a href=''
+                    <a
                       className="bg-gradient-to-r active:from-slate-900 active:to-slate-900 focus-visible:ring 
                                   outline-none transition duration-100 px-4 pt-1 pb-3 ml-3 rounded">
                     </a>
@@ -163,7 +201,7 @@ const App = () => {
 
               <div className="flex flex-col ml-10">
                 <div className="bg-slate-800 w-8 h-7 rounded-b-md shadow-xl shadow-black border-l-4 border-l-slate-900 border-b-4 border-b-slate-900">
-                  <a href=''
+                  <a
                     className="bg-gradient-to-t active:from-black active:to-slate-900 focus-visible:ring 
                                 outline-none transition duration-100 px-4 py-2 rounded">
                   </a>
@@ -205,6 +243,10 @@ const App = () => {
             <div className="flex">
               <AttributePokemon label={'Special Attack:'} count={dataPokemon.stats['special-attack']} />
               <AttributePokemon label={'Special Defense:'} count={dataPokemon.stats['special-defense']} />
+            </div>
+
+            <div className="flex">
+
             </div>
           </div>
 
