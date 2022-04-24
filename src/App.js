@@ -80,10 +80,10 @@ const App = () => {
 
     setPokemonTypes(typesOfThePokemon(data));
     setDataPokemon(pokemonSpecs);
+    obtainStrengthAndWeaknessFromType(typesOfThePokemon(data));
   }
 
   useEffect(() => {
-    obtainStrengthAndWeaknessFromType();
   }, [dataPokemon, pokemonName, pokemonColorType, pokemonTypes]);
 
   // Manejando los eventos de teclado
@@ -96,12 +96,21 @@ const App = () => {
     return arrayTypes;
   }
 
-  let obtainStrengthAndWeaknessFromType = async () => {
+  let obtainStrengthAndWeaknessFromType = async (pokemonTypes) => {
     const data = await PokemonService.getTypePokemon(pokemonTypes);
 
-    if (data.problem === null || data.problem === ResponseCode.CLIENT_ERROR) {
+    if (data.problem === null || data.problem === ResponseCode.TYPES_ERROR) {
       // TODO: manage the error w/ dispatch
-      setMsgValidation("El tipo del pokemon tiene un problema!");
+      setMsgValidation(ResponseCode.TYPES_ERROR.message);
+      
+      setPokemonDoubleStrength(["?"]);
+      setPokemonHalfStrength(["?"]);
+      setPokemonNoStrength(["?"]);
+
+      setPokemonDoubleWeakness(["?"]);
+      setPokemonHalfWeakness(["?"]);
+      setPokemonNoWeakness(["?"]);
+
       OpenModal();
       return;
     }
