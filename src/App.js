@@ -34,8 +34,15 @@ const App = () => {
   const [pokemonName, setPokemonName] = useState("");
   const [pokemonColorType] = useState(initialStatePokemonColorType);
   const [pokemonTypes, setPokemonTypes] = useState(initialStatePokemonType);
-  // const [pokemonWeakness, setPokemonWeakness] = useState([]);
-  // const [pokemonStrength, setPokemonStrength] = useState([]);
+
+  const [pokemonDoubleWeakness, setPokemonDoubleWeakness] = useState(['?']);
+  const [pokemonHalfWeakness, setPokemonHalfWeakness] = useState([]);
+  const [pokemonNoWeakness, setPokemonNoWeakness] = useState([]);
+
+  const [pokemonDoubleStrength, setPokemonDoubleStrength] = useState(['?']);
+  const [pokemonHalfStrength, setPokemonHalfStrength] = useState([]);
+  const [pokemonNoStrength, setPokemonNoStrength] = useState([]);
+
   const [damageRelationship, setDamageRelationship] = useState();
   const [dataPokemon, setDataPokemon] = useState(pokemonSpecs);
   const [msgValidation, setMsgValidation] = useState("");
@@ -99,29 +106,53 @@ const App = () => {
       return;
     }
 
+    analyzeWeakness(data.damage_relations.double_damage_from,
+      data.damage_relations.half_damage_from,
+      data.damage_relations.no_damage_from);
+
+    analyzeStrength(data.damage_relations.double_damage_to,
+      data.damage_relations.half_damage_to,
+      data.damage_relations.no_damage_to);
+
     setDamageRelationship(data.damage_relations);
-    
-    console.log(damageRelationship);
+  }
+
+  let analyzeWeakness = (doubleDamageFrom, halfDamageFrom, noDamageFrom) => {
+
+    let doubleDamageFromByTypes = doubleDamageFrom.map(elements => {
+      return elements.name;
+    });
+    setPokemonDoubleWeakness(doubleDamageFromByTypes);
+
+    let halfDamageFromByTypes = halfDamageFrom.map(elements => {
+      return elements.name;
+    });
+    setPokemonHalfWeakness(halfDamageFromByTypes);
+
+    let noDamageFromByTypes = noDamageFrom.map(elements => {
+      return elements.name;
+    });
+    setPokemonNoWeakness(noDamageFromByTypes);
 
   }
 
-  // let obtainWeaknessFromType = async () => {
-  //   const data = await PokemonService.getTypePokemon(pokemonTypes);
+  let analyzeStrength = (doubleDamageTo, halfDamageTo, noDamageTo) => {
 
-  //   if (data.problem === null || data.problem === ResponseCode.CLIENT_ERROR) {
-  //     // TODO: manage the error w/ dispatch
-  //     setMsgValidation("El tipo del pokemon tiene un problema!");
-  //     OpenModal();
-  //     return;
-  //   }
+    let doubleDamageToByTypes = doubleDamageTo.map(elements => {
+      return elements.name;
+    });
+    setPokemonDoubleStrength(doubleDamageToByTypes);
 
-  //   setPokemonWeakness(data.damage_relations.double_damage_from, 
-  //               data.damage_relations.half_damage_from, 
-  //               data.damage_relations.no_damage_from
-  //             );
+    let halfDamageToByTypes = halfDamageTo.map(elements => {
+      return elements.name;
+    });
+    setPokemonHalfStrength(halfDamageToByTypes);
 
-  //   console.log(pokemonWeakness);
-  // }
+    let noDamageToByTypes = noDamageTo.map(elements => {
+      return elements.name;
+    });
+    setPokemonNoStrength(noDamageToByTypes);
+  }
 
   return (
     <>
@@ -247,6 +278,50 @@ const App = () => {
 
             <div className="flex">
 
+              <AttributePokemonSpecial
+                label={'Weakness 2x:'}
+                colorPill={pokemonColorType[0]}
+                colorLabel={'text-white'}
+                pokemonTypes={pokemonDoubleWeakness}
+              />
+
+              <AttributePokemonSpecial
+                label={'Weakness 1/2x:'}
+                colorPill={pokemonColorType[0]}
+                colorLabel={'text-white'}
+                pokemonTypes={pokemonHalfWeakness}
+              />
+
+              <AttributePokemonSpecial
+                label={'Weakness 0x:'}
+                colorPill={pokemonColorType[0]}
+                colorLabel={'text-white'}
+                pokemonTypes={pokemonNoWeakness}
+              />
+            </div>
+
+            <div className="flex">
+
+              <AttributePokemonSpecial
+                label={'Strength 2x:'}
+                colorPill={pokemonColorType[0]}
+                colorLabel={'text-white'}
+                pokemonTypes={pokemonDoubleStrength}
+              />
+
+              <AttributePokemonSpecial
+                label={'Strength 1/2x:'}
+                colorPill={pokemonColorType[0]}
+                colorLabel={'text-white'}
+                pokemonTypes={pokemonHalfStrength}
+              />
+
+              <AttributePokemonSpecial
+                label={'Strength 0x:'}
+                colorPill={pokemonColorType[0]}
+                colorLabel={'text-white'}
+                pokemonTypes={pokemonNoStrength}
+              />
             </div>
           </div>
 
