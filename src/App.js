@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import ResponseCode from './api/utils/ResponseCode';
 import { OpenModal, Modal } from './components/Modal';
 import Constants from './utils/Constants';
+import AttributePokemonWeaknessStrength from './components/AttributePokemonWeaknessStrength';
 
 const App = () => {
 
@@ -36,14 +37,13 @@ const App = () => {
   const [pokemonTypes, setPokemonTypes] = useState(initialStatePokemonType);
 
   const [pokemonDoubleWeakness, setPokemonDoubleWeakness] = useState(['?']);
-  const [pokemonHalfWeakness, setPokemonHalfWeakness] = useState([]);
-  const [pokemonNoWeakness, setPokemonNoWeakness] = useState([]);
+  const [pokemonHalfWeakness, setPokemonHalfWeakness] = useState(['?']);
+  const [pokemonNoWeakness, setPokemonNoWeakness] = useState(['?']);
 
   const [pokemonDoubleStrength, setPokemonDoubleStrength] = useState(['?']);
-  const [pokemonHalfStrength, setPokemonHalfStrength] = useState([]);
-  const [pokemonNoStrength, setPokemonNoStrength] = useState([]);
+  const [pokemonHalfStrength, setPokemonHalfStrength] = useState(['?']);
+  const [pokemonNoStrength, setPokemonNoStrength] = useState(['?']);
 
-  const [damageRelationship, setDamageRelationship] = useState();
   const [dataPokemon, setDataPokemon] = useState(pokemonSpecs);
   const [msgValidation, setMsgValidation] = useState("");
 
@@ -113,12 +113,9 @@ const App = () => {
     analyzeStrength(data.damage_relations.double_damage_to,
       data.damage_relations.half_damage_to,
       data.damage_relations.no_damage_to);
-
-    setDamageRelationship(data.damage_relations);
   }
 
   let analyzeWeakness = (doubleDamageFrom, halfDamageFrom, noDamageFrom) => {
-
     let doubleDamageFromByTypes = doubleDamageFrom.map(elements => {
       return elements.name;
     });
@@ -133,11 +130,9 @@ const App = () => {
       return elements.name;
     });
     setPokemonNoWeakness(noDamageFromByTypes);
-
   }
 
   let analyzeStrength = (doubleDamageTo, halfDamageTo, noDamageTo) => {
-
     let doubleDamageToByTypes = doubleDamageTo.map(elements => {
       return elements.name;
     });
@@ -161,7 +156,7 @@ const App = () => {
       </div>
 
       <div className="flex justify-center bg-blue-pokemon h-auto w-auto">
-        <div className="bg-red-pokedex-pokemon border-black h-auto w-auto rounded-lg my-40">
+        <div className="bg-red-pokedex-pokemon border-black h-auto w-auto rounded-lg my-44">
           <form onSubmit={onSubmit} >
             <div className="flex mx-4 mt-6">
               <button
@@ -244,10 +239,10 @@ const App = () => {
           </div>
         </div>
 
-        <div className="bg-red-pokemon h-72 w-2 rounded-sm my-52"></div>
+        <div className="bg-red-pokemon h-96 w-2 rounded-sm my-80"></div>
 
-        <div className="bg-red-pokedex-pokemon h-auto w-auto rounded-lg my-48">
-          <div className=" bg-gray-pokemon h-auto w-auto rounded-lg mx-4 mt-4">
+        <div className="bg-red-pokedex-pokemon h-auto w-auto rounded-lg my-40">
+          <div className=" bg-gray-pokemon h-auto w-auto rounded-lg mx-6 mt-4">
 
             <div className="flex">
               <AttributePokemon label={'HP:'} count={dataPokemon.stats.hp} />
@@ -278,49 +273,52 @@ const App = () => {
 
             <div className="flex">
 
-              <AttributePokemonSpecial
-                label={'Weakness 2x:'}
-                colorPill={pokemonColorType[0]}
-                colorLabel={'text-white'}
-                pokemonTypes={pokemonDoubleWeakness}
-              />
-
-              <AttributePokemonSpecial
-                label={'Weakness 1/2x:'}
-                colorPill={pokemonColorType[0]}
-                colorLabel={'text-white'}
-                pokemonTypes={pokemonHalfWeakness}
-              />
-
-              <AttributePokemonSpecial
-                label={'Weakness 0x:'}
-                colorPill={pokemonColorType[0]}
-                colorLabel={'text-white'}
-                pokemonTypes={pokemonNoWeakness}
-              />
-            </div>
-
-            <div className="flex">
-
-              <AttributePokemonSpecial
+              <AttributePokemonWeaknessStrength
                 label={'Strength 2x:'}
                 colorPill={pokemonColorType[0]}
                 colorLabel={'text-white'}
                 pokemonTypes={pokemonDoubleStrength}
               />
 
-              <AttributePokemonSpecial
+              <AttributePokemonWeaknessStrength
+                label={'Weakness 2x:'}
+                colorPill={pokemonColorType[0]}
+                colorLabel={'text-white'}
+                pokemonTypes={pokemonDoubleWeakness}
+              />
+
+            </div>
+
+            <div className="flex">
+
+              <AttributePokemonWeaknessStrength
                 label={'Strength 1/2x:'}
                 colorPill={pokemonColorType[0]}
                 colorLabel={'text-white'}
                 pokemonTypes={pokemonHalfStrength}
               />
 
-              <AttributePokemonSpecial
+              <AttributePokemonWeaknessStrength
+                label={'Weakness 1/2x:'}
+                colorPill={pokemonColorType[0]}
+                colorLabel={'text-white'}
+                pokemonTypes={pokemonHalfWeakness}
+              />
+            </div>
+
+            <div className="flex">
+              <AttributePokemonWeaknessStrength
                 label={'Strength 0x:'}
                 colorPill={pokemonColorType[0]}
                 colorLabel={'text-white'}
                 pokemonTypes={pokemonNoStrength}
+              />
+
+              <AttributePokemonWeaknessStrength
+                label={'Weakness 0x:'}
+                colorPill={pokemonColorType[0]}
+                colorLabel={'text-white'}
+                pokemonTypes={pokemonNoWeakness}
               />
             </div>
           </div>
