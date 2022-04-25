@@ -44,6 +44,7 @@ const App = () => {
   const [pokemonHalfStrength, setPokemonHalfStrength] = useState(["?"]);
   const [pokemonNoStrength, setPokemonNoStrength] = useState(["?"]);
 
+  const [pokemonType, setPokemonType] = useState([]);
   const [dataPokemon, setDataPokemon] = useState(pokemonSpecs);
   const [msgValidation, setMsgValidation] = useState("");
 
@@ -97,7 +98,12 @@ const App = () => {
   }
 
   let obtainStrengthAndWeaknessFromType = async (pokemonTypes) => {
-    const data = await PokemonService.getTypePokemon(pokemonTypes);
+
+    let data = '';
+    for (let iterator of pokemonTypes) {
+      data = await PokemonService.getTypePokemon(iterator);
+      setPokemonType(data);
+    }
 
     if (data.problem === null || data.problem === ResponseCode.TYPES_ERROR) {
       // TODO: manage the error w/ dispatch
@@ -110,6 +116,8 @@ const App = () => {
       setPokemonDoubleWeakness(["?"]);
       setPokemonHalfWeakness(["?"]);
       setPokemonNoWeakness(["?"]);
+
+      setPokemonType("");
 
       OpenModal();
       return;
