@@ -58,6 +58,14 @@ const App = () => {
       setMsgValidation(ResponseCode.CLIENT_ERROR.message);
       setDataPokemon(pokemonSpecs);
       setPokemonTypes(initialStatePokemonType);
+
+      setPokemonDoubleStrength(["?"]);
+      setPokemonHalfStrength(["?"]);
+      setPokemonNoStrength(["?"]);
+      setPokemonDoubleWeakness(["?"]);
+      setPokemonHalfWeakness(["?"]);
+      setPokemonNoWeakness(["?"]);
+      
       OpenModal();
       return;
     }
