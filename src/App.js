@@ -14,7 +14,7 @@ const App = () => {
 
   let pokemonSpecs = {
     id: 0,
-    name: `Who"s that pokemon?`,
+    name: `Who's that pokemon?`,
     weight: 0,
     urlImage: "",
     height: 0,
