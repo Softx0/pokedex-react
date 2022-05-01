@@ -65,7 +65,7 @@ const App = () => {
       setPokemonDoubleWeakness(["?"]);
       setPokemonHalfWeakness(["?"]);
       setPokemonNoWeakness(["?"]);
-      
+
       OpenModal();
       return;
     }
@@ -116,7 +116,7 @@ const App = () => {
     if (data.problem === null || data.problem === ResponseCode.TYPES_ERROR) {
       // TODO: manage the error w/ dispatch
       setMsgValidation(ResponseCode.TYPES_ERROR.message);
-      
+
       setPokemonDoubleStrength(["?"]);
       setPokemonHalfStrength(["?"]);
       setPokemonNoStrength(["?"]);
@@ -264,36 +264,27 @@ const App = () => {
           </div>
         </div>
 
-        <div className="bg-red-pokemon h-96 w-2 rounded-sm my-80"></div>
+        <div className="bg-red-pokemon h-72 w-2 rounded-sm my-80"></div>
 
+        {/* Seccion correspondiente al lado derecho del Pokedex */}
         <div className="bg-red-pokedex-pokemon h-auto w-auto rounded-lg my-40">
           <div className=" bg-gray-pokemon h-auto w-auto rounded-lg mx-6 mt-4">
 
             <div className="flex">
-              <AttributePokemon label={"HP:"} count={dataPokemon.stats.hp} />
-              <AttributePokemon label={"Weight:"} count={dataPokemon.weight} />
+              <AttributePokemon label={"HP"} count={dataPokemon.stats.hp} />
+              <AttributePokemon label={"Weight"} count={dataPokemon.weight} />
+              <AttributePokemon label={"Speed"} count={dataPokemon.stats.attack} />
+              <AttributePokemon label={"Attack"} count={dataPokemon.stats.attack} />
+              <AttributePokemon label={"Defense"} count={dataPokemon.stats.defense} />
             </div>
 
             <div className="flex">
-
               <AttributePokemonSpecial
                 label={"Type:"}
                 colorPill={pokemonColorType[0]}
                 colorLabel={"text-white"}
                 pokemonTypes={pokemonTypes}
               />
-
-              <AttributePokemon label={"Speed:"} count={dataPokemon.stats.speed} />
-            </div>
-
-            <div className="flex">
-              <AttributePokemon label={"Attack:"} count={dataPokemon.stats.attack} />
-              <AttributePokemon label={"Defense:"} count={dataPokemon.stats.defense} />
-            </div>
-
-            <div className="flex">
-              <AttributePokemon label={"Special Attack:"} count={dataPokemon.stats["special-attack"]} />
-              <AttributePokemon label={"Special Defense:"} count={dataPokemon.stats["special-defense"]} />
             </div>
 
             <div className="flex">
@@ -304,14 +295,15 @@ const App = () => {
                 colorLabel={"text-white"}
                 pokemonTypes={pokemonDoubleStrength}
               />
+            </div>
 
+            <div className="flex">
               <AttributePokemonWeaknessStrength
                 label={"Weakness 2x:"}
                 colorPill={pokemonColorType[0]}
                 colorLabel={"text-white"}
                 pokemonTypes={pokemonDoubleWeakness}
               />
-
             </div>
 
             <div className="flex">
@@ -322,7 +314,9 @@ const App = () => {
                 colorLabel={"text-white"}
                 pokemonTypes={pokemonHalfStrength}
               />
+            </div>
 
+            <div className="flex">
               <AttributePokemonWeaknessStrength
                 label={"Weakness 1/2x:"}
                 colorPill={pokemonColorType[0]}
@@ -338,7 +332,9 @@ const App = () => {
                 colorLabel={"text-white"}
                 pokemonTypes={pokemonNoStrength}
               />
+            </div>
 
+            <div className="flex">
               <AttributePokemonWeaknessStrength
                 label={"Weakness 0x:"}
                 colorPill={pokemonColorType[0]}

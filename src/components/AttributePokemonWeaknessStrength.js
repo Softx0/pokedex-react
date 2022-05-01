@@ -12,7 +12,7 @@ const AttributePokemonWeaknessStrength = ({
             return (
                 <>
                     <label key={index}
-                        className={`flex text-sm font-bold rounded-sm px-1 m-2 ${colorLabel} 
+                        className={`flex text-sm font-medium rounded-sm px-1 m-1 ${colorLabel} 
                               ${Types[element] ? Types[element] : colorPill}`}>
                         {element.toUpperCase()}
                     </label>
@@ -23,9 +23,9 @@ const AttributePokemonWeaknessStrength = ({
 
     return (
         <>
-            <div className="flex flex-col bg-gray-900 h-auto w-full rounded-md m-2">
+            <div className="flex flex-row bg-gray-900 h-auto w-full rounded-md mx-2 my-1">
                 <div className="flex">
-                    <label className="flex text-sm text-yellow-pokemon m-2">{label}</label>
+                    <label className="flex text-sm text-yellow-pokemon m-1">{label}</label>
                 </div>
                 <div className="flex">
                     {determinateColorByTypes(pokemonTypes)}
