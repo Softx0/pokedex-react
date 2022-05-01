@@ -10,7 +10,9 @@ const AttributePokemonSpecial = ({
     const determinateColorByTypes = (arrayPokemonTypes) => {
         return arrayPokemonTypes.map((element, index) => {
             return (
-                <label key={index} className={`flex text-sm font-bold rounded-sm px-1 py-1 m-2 ${colorLabel} ${Types[element] ? Types[element] : colorPill}`}>
+                <label key={index}
+                    className={`flex text-sm font-medium rounded-sm px-1 m-1 ${colorLabel}
+                                                                ${Types[element] ? Types[element] : colorPill}`}>
                     {element.toUpperCase()}
                 </label>
             )
@@ -19,9 +21,13 @@ const AttributePokemonSpecial = ({
 
     return (
         <>
-            <div className="flex bg-gray-900 h-auto w-full rounded-md m-2">
-                <label className="flex text-sm text-yellow-pokemon m-2">{label}</label>
-                {determinateColorByTypes(pokemonTypes)}
+            <div className="flex flex-row bg-gray-900 h-auto w-full rounded-md mx-2 my-1">
+                <div className="flex">
+                    <label className="flex text-sm text-yellow-pokemon m-1">{label}</label>
+                </div>
+                <div className="flex">
+                    {determinateColorByTypes(pokemonTypes)}
+                </div>
             </div>
         </>
     );
