@@ -1,13 +1,14 @@
-import pokedexLogo from './assets/images/pokedex-project.png';
-import defaultImage from './assets/images/who-is-that-pokemon.png';
+import pokedexLogo from "./assets/images/pokedex-project.png";
+import defaultImage from "./assets/images/who-is-that-pokemon.png";
 import ScreenPokedex from "./components/ScreenPokedex";
-import AttributePokemon from './components/AttributePokemon';
-import AttributePokemonSpecial from './components/AttributePokemonSpecial';
-import PokemonService from './api/PokemonService';
-import { useState, useEffect } from 'react';
-import ResponseCode from './api/utils/ResponseCode';
-import { OpenModal, Modal } from './components/Modal';
-import Constants from './utils/Constants';
+import AttributePokemon from "./components/AttributePokemon";
+import AttributePokemonSpecial from "./components/AttributePokemonSpecial";
+import PokemonService from "./api/PokemonService";
+import { useState, useEffect } from "react";
+import ResponseCode from "./api/utils/ResponseCode";
+import { OpenModal, Modal } from "./components/Modal";
+import Constants from "./utils/Constants";
+import AttributePokemonWeaknessStrength from "./components/AttributePokemonWeaknessStrength";
 
 const App = () => {
 
@@ -15,17 +16,17 @@ const App = () => {
     id: 0,
     name: `Who's that pokemon?`,
     weight: 0,
-    urlImage: '',
+    urlImage: "",
     height: 0,
     stats: {
       hp: 0,
       attack: 0,
       defense: 0,
       speed: 0,
-      'special-attack': 0,
-      'special-defense': 0,
+      "special-attack": 0,
+      "special-defense": 0,
     },
-    type: '???',
+    type: "???",
   };
 
   const initialStatePokemonColorType = [Constants.BG_COLOR_DEFAULT.default];
@@ -34,9 +35,16 @@ const App = () => {
   const [pokemonName, setPokemonName] = useState("");
   const [pokemonColorType] = useState(initialStatePokemonColorType);
   const [pokemonTypes, setPokemonTypes] = useState(initialStatePokemonType);
-  // const [pokemonWeakness, setPokemonWeakness] = useState([]);
-  // const [pokemonStrength, setPokemonStrength] = useState([]);
-  const [damageRelationship, setDamageRelationship] = useState();
+
+  const [pokemonDoubleWeakness, setPokemonDoubleWeakness] = useState(["?"]);
+  const [pokemonHalfWeakness, setPokemonHalfWeakness] = useState(["?"]);
+  const [pokemonNoWeakness, setPokemonNoWeakness] = useState(["?"]);
+
+  const [pokemonDoubleStrength, setPokemonDoubleStrength] = useState(["?"]);
+  const [pokemonHalfStrength, setPokemonHalfStrength] = useState(["?"]);
+  const [pokemonNoStrength, setPokemonNoStrength] = useState(["?"]);
+
+  const [pokemonType, setPokemonType] = useState([]);
   const [dataPokemon, setDataPokemon] = useState(pokemonSpecs);
   const [msgValidation, setMsgValidation] = useState("");
 
@@ -50,6 +58,14 @@ const App = () => {
       setMsgValidation(ResponseCode.CLIENT_ERROR.message);
       setDataPokemon(pokemonSpecs);
       setPokemonTypes(initialStatePokemonType);
+
+      setPokemonDoubleStrength(["?"]);
+      setPokemonHalfStrength(["?"]);
+      setPokemonNoStrength(["?"]);
+      setPokemonDoubleWeakness(["?"]);
+      setPokemonHalfWeakness(["?"]);
+      setPokemonNoWeakness(["?"]);
+      
       OpenModal();
       return;
     }
@@ -73,10 +89,10 @@ const App = () => {
 
     setPokemonTypes(typesOfThePokemon(data));
     setDataPokemon(pokemonSpecs);
+    obtainStrengthAndWeaknessFromType(typesOfThePokemon(data));
   }
 
   useEffect(() => {
-    obtainStrengthAndWeaknessFromType();
   }, [dataPokemon, pokemonName, pokemonColorType, pokemonTypes]);
 
   // Manejando los eventos de teclado
@@ -89,39 +105,74 @@ const App = () => {
     return arrayTypes;
   }
 
-  let obtainStrengthAndWeaknessFromType = async () => {
-    const data = await PokemonService.getTypePokemon(pokemonTypes);
+  let obtainStrengthAndWeaknessFromType = async (pokemonTypes) => {
 
-    if (data.problem === null || data.problem === ResponseCode.CLIENT_ERROR) {
+    let data = '';
+    for (let iterator of pokemonTypes) {
+      data = await PokemonService.getTypePokemon(iterator);
+      setPokemonType(data);
+    }
+
+    if (data.problem === null || data.problem === ResponseCode.TYPES_ERROR) {
       // TODO: manage the error w/ dispatch
-      setMsgValidation("El tipo del pokemon tiene un problema!");
+      setMsgValidation(ResponseCode.TYPES_ERROR.message);
+      
+      setPokemonDoubleStrength(["?"]);
+      setPokemonHalfStrength(["?"]);
+      setPokemonNoStrength(["?"]);
+
+      setPokemonDoubleWeakness(["?"]);
+      setPokemonHalfWeakness(["?"]);
+      setPokemonNoWeakness(["?"]);
+
+      setPokemonType("");
+
       OpenModal();
       return;
     }
 
-    setDamageRelationship(data.damage_relations);
-    
-    console.log(damageRelationship);
+    analyzeWeakness(data.damage_relations.double_damage_from,
+      data.damage_relations.half_damage_from,
+      data.damage_relations.no_damage_from);
 
+    analyzeStrength(data.damage_relations.double_damage_to,
+      data.damage_relations.half_damage_to,
+      data.damage_relations.no_damage_to);
   }
 
-  // let obtainWeaknessFromType = async () => {
-  //   const data = await PokemonService.getTypePokemon(pokemonTypes);
+  let analyzeWeakness = (doubleDamageFrom, halfDamageFrom, noDamageFrom) => {
+    let doubleDamageFromByTypes = doubleDamageFrom.map(elements => {
+      return elements.name;
+    });
+    setPokemonDoubleWeakness(doubleDamageFromByTypes);
 
-  //   if (data.problem === null || data.problem === ResponseCode.CLIENT_ERROR) {
-  //     // TODO: manage the error w/ dispatch
-  //     setMsgValidation("El tipo del pokemon tiene un problema!");
-  //     OpenModal();
-  //     return;
-  //   }
+    let halfDamageFromByTypes = halfDamageFrom.map(elements => {
+      return elements.name;
+    });
+    setPokemonHalfWeakness(halfDamageFromByTypes);
 
-  //   setPokemonWeakness(data.damage_relations.double_damage_from, 
-  //               data.damage_relations.half_damage_from, 
-  //               data.damage_relations.no_damage_from
-  //             );
+    let noDamageFromByTypes = noDamageFrom.map(elements => {
+      return elements.name;
+    });
+    setPokemonNoWeakness(noDamageFromByTypes);
+  }
 
-  //   console.log(pokemonWeakness);
-  // }
+  let analyzeStrength = (doubleDamageTo, halfDamageTo, noDamageTo) => {
+    let doubleDamageToByTypes = doubleDamageTo.map(elements => {
+      return elements.name;
+    });
+    setPokemonDoubleStrength(doubleDamageToByTypes);
+
+    let halfDamageToByTypes = halfDamageTo.map(elements => {
+      return elements.name;
+    });
+    setPokemonHalfStrength(halfDamageToByTypes);
+
+    let noDamageToByTypes = noDamageTo.map(elements => {
+      return elements.name;
+    });
+    setPokemonNoStrength(noDamageToByTypes);
+  }
 
   return (
     <>
@@ -130,7 +181,7 @@ const App = () => {
       </div>
 
       <div className="flex justify-center bg-blue-pokemon h-auto w-auto">
-        <div className="bg-red-pokedex-pokemon border-black h-auto w-auto rounded-lg my-40">
+        <div className="bg-red-pokedex-pokemon border-black h-auto w-auto rounded-lg my-44">
           <form onSubmit={onSubmit} >
             <div className="flex mx-4 mt-6">
               <button
@@ -153,7 +204,7 @@ const App = () => {
               />
             </div>
           </form>
-          <ScreenPokedex imagePokemon={dataPokemon.urlImage !== '' ? dataPokemon.urlImage : defaultImage}
+          <ScreenPokedex imagePokemon={dataPokemon.urlImage !== "" ? dataPokemon.urlImage : defaultImage}
             idPokemon={dataPokemon.id}
             namePokemon={dataPokemon.name}
           />
@@ -213,40 +264,87 @@ const App = () => {
           </div>
         </div>
 
-        <div className="bg-red-pokemon h-72 w-2 rounded-sm my-52"></div>
+        <div className="bg-red-pokemon h-96 w-2 rounded-sm my-80"></div>
 
-        <div className="bg-red-pokedex-pokemon h-auto w-auto rounded-lg my-48">
-          <div className=" bg-gray-pokemon h-auto w-auto rounded-lg mx-4 mt-4">
+        <div className="bg-red-pokedex-pokemon h-auto w-auto rounded-lg my-40">
+          <div className=" bg-gray-pokemon h-auto w-auto rounded-lg mx-6 mt-4">
 
             <div className="flex">
-              <AttributePokemon label={'HP:'} count={dataPokemon.stats.hp} />
-              <AttributePokemon label={'Weight:'} count={dataPokemon.weight} />
+              <AttributePokemon label={"HP:"} count={dataPokemon.stats.hp} />
+              <AttributePokemon label={"Weight:"} count={dataPokemon.weight} />
             </div>
 
             <div className="flex">
 
               <AttributePokemonSpecial
-                label={'Type:'}
+                label={"Type:"}
                 colorPill={pokemonColorType[0]}
-                colorLabel={'text-white'}
+                colorLabel={"text-white"}
                 pokemonTypes={pokemonTypes}
               />
 
-              <AttributePokemon label={'Speed:'} count={dataPokemon.stats.speed} />
+              <AttributePokemon label={"Speed:"} count={dataPokemon.stats.speed} />
             </div>
 
             <div className="flex">
-              <AttributePokemon label={'Attack:'} count={dataPokemon.stats.attack} />
-              <AttributePokemon label={'Defense:'} count={dataPokemon.stats.defense} />
+              <AttributePokemon label={"Attack:"} count={dataPokemon.stats.attack} />
+              <AttributePokemon label={"Defense:"} count={dataPokemon.stats.defense} />
             </div>
 
             <div className="flex">
-              <AttributePokemon label={'Special Attack:'} count={dataPokemon.stats['special-attack']} />
-              <AttributePokemon label={'Special Defense:'} count={dataPokemon.stats['special-defense']} />
+              <AttributePokemon label={"Special Attack:"} count={dataPokemon.stats["special-attack"]} />
+              <AttributePokemon label={"Special Defense:"} count={dataPokemon.stats["special-defense"]} />
             </div>
 
             <div className="flex">
 
+              <AttributePokemonWeaknessStrength
+                label={"Strength 2x:"}
+                colorPill={pokemonColorType[0]}
+                colorLabel={"text-white"}
+                pokemonTypes={pokemonDoubleStrength}
+              />
+
+              <AttributePokemonWeaknessStrength
+                label={"Weakness 2x:"}
+                colorPill={pokemonColorType[0]}
+                colorLabel={"text-white"}
+                pokemonTypes={pokemonDoubleWeakness}
+              />
+
+            </div>
+
+            <div className="flex">
+
+              <AttributePokemonWeaknessStrength
+                label={"Strength 1/2x:"}
+                colorPill={pokemonColorType[0]}
+                colorLabel={"text-white"}
+                pokemonTypes={pokemonHalfStrength}
+              />
+
+              <AttributePokemonWeaknessStrength
+                label={"Weakness 1/2x:"}
+                colorPill={pokemonColorType[0]}
+                colorLabel={"text-white"}
+                pokemonTypes={pokemonHalfWeakness}
+              />
+            </div>
+
+            <div className="flex">
+              <AttributePokemonWeaknessStrength
+                label={"Strength 0x:"}
+                colorPill={pokemonColorType[0]}
+                colorLabel={"text-white"}
+                pokemonTypes={pokemonNoStrength}
+              />
+
+              <AttributePokemonWeaknessStrength
+                label={"Weakness 0x:"}
+                colorPill={pokemonColorType[0]}
+                colorLabel={"text-white"}
+                pokemonTypes={pokemonNoWeakness}
+              />
             </div>
           </div>
 
