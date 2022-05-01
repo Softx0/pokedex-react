@@ -264,7 +264,7 @@ const App = () => {
           </div>
         </div>
 
-        <div className="bg-red-pokemon h-96 w-2 rounded-sm my-80"></div>
+        <div className="bg-red-pokemon h-72 w-2 rounded-sm my-80"></div>
 
         {/* Seccion correspondiente al lado derecho del Pokedex */}
         <div className="bg-red-pokedex-pokemon h-auto w-auto rounded-lg my-40">
